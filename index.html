@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Store</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Book Store</h1>
+
+    <form id="bookForm">
+        <input type="text" id="title" placeholder="Title" required>
+        <input type="text" id="author" placeholder="Author" required>
+        <input type="number" id="price" placeholder="Price" required>
+        <button type="submit">Add Book</button>
+    </form>
+
+    <h2>Books List</h2>
+    <ul id="booksList"></ul>
+
+    <script>
+        // Store books in local array
+        const books = [];
+
+        const form = document.getElementById('bookForm');
+        const booksList = document.getElementById('booksList');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const title = document.getElementById('title').value;
+            const author = document.getElementById('author').value;
+            const price = document.getElementById('price').value;
+
+            const book = { title, author, price };
+            books.push(book);
+
+            renderBooks();
+            form.reset();
+        });
+
+        function renderBooks() {
+            booksList.innerHTML = '';
+            books.forEach((book, index) => {
+                const li = document.createElement('li');
+                li.textContent = `${book.title} by ${book.author} - $${book.price}`;
+                booksList.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
